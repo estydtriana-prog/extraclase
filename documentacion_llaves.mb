@@ -1,0 +1,65 @@
+ Documentación de Llaves – Tienda Familiar
+
+ Tabla: Clientes
+*Llave primaria (PK):**
+  - `id_cliente`
+- **Llaves foráneas (FK):**
+  - Ninguna (tabla independiente).
+- **Llaves candidatas:**
+  - `cedula`
+  - `telefono`
+  - `correo`
+
+
+ Tabla: Proveedores
+- **Llave primaria (PK):**
+  - `id_proveedor`
+- **Llaves foráneas (FK):**
+  - Ninguna (tabla independiente).
+- **Llaves candidatas:**
+  - `nit`
+  - `telefono`
+  - `correo`
+
+
+
+ Tabla: Productos
+- **Llave primaria (PK):**
+  - `id_producto`
+- **Llaves foráneas (FK):**
+  - `id_proveedor` → referencia a **Proveedores(id_proveedor)**
+- **Llaves candidatas:**
+  - `codigo_barras`
+  - {`nombre_producto`, `categoria`}
+  - {`nombre_producto`, `id_proveedor`}
+
+
+ Tabla: Ventas
+- **Llave primaria (PK):**
+  - `id_venta`
+- **Llaves foráneas (FK):**
+  - `id_cliente` → referencia a **Clientes(id_cliente)**
+- **Llaves candidatas:**
+  - `codigo_factura`
+  - {`id_cliente`, `fecha`, `total`}
+  - {`fecha`, `codigo_factura`}  
+
+
+
+ Tabla: Detalle_Venta
+- **Llave primaria (PK):**
+  - `id_detalle`
+- **Llaves foráneas (FK):**
+  - `id_venta` → referencia a **Ventas(id_venta)**
+  - `id_producto` → referencia a **Productos(id_producto)**
+- **Llaves candidatas:**
+  - {`id_venta`, `id_producto`}
+  - {`id_venta`, `id_detalle`}
+  - {`id_producto`, `cantidad`}  
+
+
+
+# Resumen General
+- **PK (Llaves primarias):** 5 (una por cada tabla).  
+- **FK (Llaves foráneas):** 4 (Clientes → Ventas, Proveedores → Productos, Ventas → Detalle_Venta, Productos → Detalle_Venta).  
+- **Llaves candidatas:** Al menos 3 en cada tabla, para cumplir con los requisitos del proyecto.
